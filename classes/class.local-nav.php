@@ -31,7 +31,7 @@ class MW_WP_Hacks_Local_Nav {
 	 * __construct
 	 */
 	public function __construct( array $args = array() ) {
-		$this->args = shortcode_atts( $defaults, $args );
+		$this->args = shortcode_atts( $this->defaults, $args );
 	}
 
 	/**

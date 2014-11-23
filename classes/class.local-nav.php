@@ -46,15 +46,9 @@ class MW_WP_Hacks_Local_Nav {
 		elseif ( MW_WP_Hacks::is_custom_post_type() ) {
 			$post_type = $this->get_post_type();
 			$post_type_object = get_post_type_object( $post_type );
-			// 投稿型のとき
-			if ( empty( $post_type_object->hierarchical ) ) {
-				$this->display_for_custom_post();
-			}
-			// ページ型のとき
-			else {
-				$this->display_for_custom_post_page();
-				$this->display_for_custom_post();
-			}
+
+			$this->display_for_custom_post_page();
+			$this->display_for_custom_post();
 		}
 		// （カスタム投稿タイプでない）カスタムタクソノミーのとき
 		elseif ( is_tax() ) {
@@ -88,23 +82,21 @@ class MW_WP_Hacks_Local_Nav {
 		$post_type = $this->get_post_type();
 		$post_type_object = get_post_type_object( $post_type );
 
-		if ( empty( $post_type_object->taxonomies ) )
-			return;
+		if ( !empty( $post_type_object->taxonomies ) ) {
+			foreach ( $post_type_object->taxonomies as $taxonomy_name ) {
+				$children = wp_list_categories( array(
+					'title_li'   => '',
+					'show_count' => false,
+					'hide_empty' => true,
+					'echo'       => false,
+					'taxonomy'   => $taxonomy_name,
+				) );
+				$taxonomy = get_taxonomy( $taxonomy_name );
+				if ( !isset( $taxonomy->label ) )
+					continue;
 
-		foreach ( $post_type_object->taxonomies as $taxonomy_name ) {
-			$children = wp_list_categories( array(
-				'title_li'   => '',
-				'show_count' => false,
-				'hide_empty' => true,
-				'echo'       => false,
-				'taxonomy'   => $taxonomy_name,
-			) );
-			$taxonomy = get_taxonomy( $taxonomy_name );
-			if ( isset( $taxonomy->label ) ) {
-				$title = $taxonomy->label;
+				$this->template( $taxonomy->label, '', $children );
 			}
-
-			$this->template( $title, '', $children );
 		}
 	}
 
@@ -134,23 +126,21 @@ class MW_WP_Hacks_Local_Nav {
 		$post_type = get_post_type();
 		$post_type_object = get_post_type_object( $post_type );
 
-		if ( empty( $post_type_object->taxonomies ) )
-			return;
+		if ( !empty( $post_type_object->taxonomies ) ) {
+			foreach ( $post_type_object->taxonomies as $taxonomy_name ) {
+				$children = wp_list_categories( array(
+					'title_li'   => '',
+					'show_count' => false,
+					'hide_empty' => true,
+					'echo'       => false,
+					'taxonomy'   => $taxonomy_name,
+				) );
+				$taxonomy = get_taxonomy( $taxonomy_name );
+				if ( !isset( $taxonomy->label ) )
+					continue;
 
-		foreach ( $post_type_object->taxonomies as $taxonomy_name ) {
-			$children = wp_list_categories( array(
-				'title_li'   => '',
-				'show_count' => false,
-				'hide_empty' => true,
-				'echo'       => false,
-				'taxonomy'   => $taxonomy_name,
-			) );
-			$taxonomy = get_taxonomy( $taxonomy_name );
-			if ( isset( $taxonomy->label ) ) {
-				$title = $taxonomy->label;
+				$this->template( $taxonomy->label, '', $children );
 			}
-
-			$this->template( $title, '', $children );
 		}
 	}
 

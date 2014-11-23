@@ -162,7 +162,7 @@ class MW_WP_Hacks_Local_Nav {
 		if ( $this->args['hide_empty'] === true && empty( $children ) )
 			return;
 		?>
-		<?php if ( true !== $show && !empty( $children ) ) : ?>
+		<?php if ( true === $show || !empty( $children ) ) : ?>
 		<div class="localnav">
 			<dl>
 				<?php if ( true === $show ) : ?>

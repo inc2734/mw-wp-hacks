@@ -58,6 +58,7 @@ MW WP Hacks is plugin to help with development in WordPress.
 
 = 1.1.0 =
 * Add setting that custom post type to disable a single page.
+* Fixed a japanese translation bug.
 
 = 1.0.4 =
 * Fixed a custom rss settings bug.

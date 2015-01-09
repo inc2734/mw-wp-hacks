@@ -57,6 +57,9 @@ MW WP Hacks is plugin to help with development in WordPress.
 
 == Changelog ==
 
+= 1.3.3 =
+* Fixed a bug that widget does not display.
+
 = 1.3.2 =
 * Fixed a bug that sometimes incorrect fb:app_id is output.
 

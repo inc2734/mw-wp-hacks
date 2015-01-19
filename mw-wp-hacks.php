@@ -3,13 +3,13 @@
  * Plugin Name: MW WP Hacks
  * Plugin URI: https://github.com/inc2734/mw-wp-hacks
  * Description: MW WP Hacks is plugin to help with development in WordPress.
- * Version: 1.3.3
+ * Version: 1.3.4
  * Author: Takashi Kitajima
  * Author URI: http://2inc.org
  * Text Domain: mw-wp-hacks
  * Domain Path: /languages/
  * Created : September 30, 2013
- * Modified: January 9, 2015
+ * Modified: January 19, 2015
  * License: GPLv2
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -52,6 +52,7 @@ class MW_WP_Hacks {
 		include_once( plugin_dir_path( __FILE__ ) . 'classes/class.setting-social.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'classes/class.setting-thumbnail.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'classes/class.setting-widget.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'classes/class.setting-taxonomy-archive-disable.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'classes/class.setting-cpt-archive-only.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'classes/class.setting-cpt-archive-posts.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'classes/class.model.php' );
@@ -77,6 +78,7 @@ class MW_WP_Hacks {
 		$Setting_Social                   = new MW_WP_Hacks_Setting_Social();
 		$Setting_Thumbnail                = new MW_WP_Hacks_Setting_Thumbnail();
 		$Setting_Widget                   = new MW_WP_Hacks_Setting_Widget();
+		$Setting_Taxonomy_Archive_Disable = new MW_WP_Hacks_Setting_Taxonomy_Archive_Disable();
 		$Setting_CPT_Archive_Only         = new MW_WP_Hacks_Setting_CPT_Archive_Only();
 		$Setting_CPT_Archive_Posts        = new MW_WP_Hacks_Setting_CPT_Archive_Posts();
 		$Model = new MW_WP_Hacks_Model( array(
@@ -90,6 +92,7 @@ class MW_WP_Hacks {
 			'Social'                   => $Setting_Social,
 			'Thumbnail'                => $Setting_Thumbnail,
 			'Widget'                   => $Setting_Widget,
+			'Taxonomy_Archive_Disable' => $Setting_Taxonomy_Archive_Disable,
 			'CPT_Archive_Only'         => $Setting_CPT_Archive_Only,
 			'CPT_Archive_Posts'        => $Setting_CPT_Archive_Posts,
 		) );
@@ -174,6 +177,9 @@ class MW_WP_Hacks {
 			add_action( 'widgets_init', array( $Model, 'widgets_init' ) );
 		}
 
+		// Taxonomy archive disable
+		add_action( 'template_redirect', array( $Model, 'taxonomy_archive_disable' ) );
+
 		// CPT archive only
 		$Setting_CPT_Archive_Only_option = $Setting_CPT_Archive_Only->get_option();
 		if ( $Setting_CPT_Archive_Only_option ) {
@@ -204,6 +210,7 @@ class MW_WP_Hacks {
 		delete_option( 'mw-wp-hacks-social' );
 		delete_option( 'mw-wp-hacks-thumbnail' );
 		delete_option( 'mw-wp-hacks-widget' );
+		delete_option( 'mw-wp-hacks-taxonomy-archive-disable' );
 		delete_option( 'mw-wp-hacks-cpt-archive-only' );
 		delete_option( 'mw-wp-hacks-cpt-archive-posts' );
 		// 後方互換

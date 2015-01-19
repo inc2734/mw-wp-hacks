@@ -135,22 +135,13 @@ class MW_WP_Hacks {
 		}
 
 		// excerpt
-		$Setting_Excerpt_option = $Setting_Excerpt->get_option();
-		if ( !empty( $Setting_Excerpt_option ) ) {
-			add_filter( 'wp_trim_excerpt', array( $Model, 'wp_trim_excerpt' ) );
-		}
+		add_filter( 'wp_trim_excerpt', array( $Model, 'wp_trim_excerpt' ) );
 
 		// Excerptmore
-		$Setting_Excerptmore_option = $Setting_Excerptmore->get_option();
-		if ( !empty( $Setting_Excerptmore_option ) ) {
-			add_filter( 'excerpt_more', array( $Model, 'excerpt_more' ) );
-		}
+		add_filter( 'excerpt_more', array( $Model, 'excerpt_more' ) );
 
 		// feed
-		$Setting_Feed_option = $Setting_Feed->get_option();
-		if ( in_array( 'true', $Setting_Feed_option ) ) {
-			add_filter( 'pre_get_posts', array( $Model, 'set_rss_post_types' ) );
-		}
+		add_filter( 'pre_get_posts', array( $Model, 'set_rss_post_types' ) );
 
 		// ogp
 		$Setting_Ogp_option = $Setting_Ogp->get_option();
@@ -172,26 +163,17 @@ class MW_WP_Hacks {
 		$Model->set_thumbnail();
 
 		// widget
-		$Setting_Widget_option = $Setting_Widget->get_option();
-		if ( count( $Setting_Widget_option ) > 1 ) {
-			add_action( 'widgets_init', array( $Model, 'widgets_init' ) );
-		}
+		add_action( 'widgets_init', array( $Model, 'widgets_init' ) );
 
 		// Taxonomy archive disable
 		add_action( 'template_redirect', array( $Model, 'taxonomy_archive_disable' ) );
 
 		// CPT archive only
-		$Setting_CPT_Archive_Only_option = $Setting_CPT_Archive_Only->get_option();
-		if ( $Setting_CPT_Archive_Only_option ) {
-			add_action( 'template_redirect', array( $Model, 'redirect_archive_only_for_single' ) );
-			add_action( 'admin_head', array( $Model, 'disable_preview_button' ) );
-		}
+		add_action( 'template_redirect', array( $Model, 'redirect_archive_only_for_single' ) );
+		add_action( 'admin_head', array( $Model, 'disable_preview_button' ) );
 
 		// CPT archive posts
-		$Setting_CPT_Archive_Posts_option = $Setting_CPT_Archive_Posts->get_option();
-		if ( $Setting_CPT_Archive_Posts_option ) {
-			add_action( 'pre_get_posts', array( $Model, 'posts_per_page' ) );
-		}
+		add_action( 'pre_get_posts', array( $Model, 'posts_per_page' ) );
 	}
 
 	/**

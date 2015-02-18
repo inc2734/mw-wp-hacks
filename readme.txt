@@ -21,7 +21,7 @@ MW WP Hacks is plugin to help with development in WordPress.
 * Add Facebook AppID field in management page. IF save this, include &lt;div id="fb-root"&gt;&lt;/div&gt; any more.
 * Add GA Tracking ID field in management page. IF save this, include Google Analytics tag.
 * Add UA Tracking ID field in management page. IF save this, include Universal Analytics tag.
-* Add OGP setting.
+* Add OGP & Twitter Cards setting.
 * Add Google Site Verification setting.
 * Add Meta description setting.
 * Include any social scripts. ( Facebook, Twitter, Hatena Bookmark, Google+1 )

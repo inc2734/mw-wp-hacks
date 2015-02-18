@@ -166,7 +166,7 @@ class MW_WP_Hacks_Setting_Ogp extends MW_WP_Hacks_Abstract_Setting {
 							<td>
 								@<input type="text" name="<?php echo esc_attr( $this->get_name() ); ?>[twitter_site]" value="<?php echo esc_attr( $option['twitter_site'] ); ?>" size="20" style="width: auto" />
 								<p class="description">
-									<?php esc_html__( 'If this field is not entered , meta tags for Twitter Cards is not generated.', 'mw-wp-hacks' ); ?>
+									<?php esc_html_e( 'If this field is not entered , meta tags for Twitter Cards is not generated.', 'mw-wp-hacks' ); ?>
 								</p>
 							</td>
 						</tr>

@@ -33,7 +33,7 @@ MW WP Hacks is plugin to help with development in WordPress.
 * Useful method: MW_WP_Hacks::pager();
 * Useful method: MW_WP_Hacks::get_top_parent_id();
 * Useful method: MW_WP_Hacks::is_custom_post_type();
-* Useful method: MW_WP_Hacks::the_localNav();
+* Useful method: MW_WP_Hacks::the_local_nav(); There is the shortcode [local_nav]
 * Useful method: MW_WP_Hacks::the_bread_crumb();
 * The Class that Register Custom Post Type and Custom taxonomy.  
   ‘‘‘
